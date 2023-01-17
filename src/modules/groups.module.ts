@@ -1,15 +1,15 @@
 import { Module } from '@nestjs/common';
-import { ClientsModule, Transport } from '@nestjs/microservices';
+import { GroupsService } from './groups.service';
+import { GroupsController } from './groups.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { queues } from './submodules/backend-refresher-1.0-rmq/src/constants/rmqQueues';
-import { Content } from './submodules/backend-refresher-entities-1.0/src/entities/content-entity';
-import { Group } from './submodules/backend-refresher-entities-1.0/src/entities/group.entity';
-import { Option } from './submodules/backend-refresher-entities-1.0/src/entities/option.entity';
-import { Reaction } from './submodules/backend-refresher-entities-1.0/src/entities/reaction.entity';
-import { User } from './submodules/backend-refresher-entities-1.0/src/entities/user.entity';
-import { GroupsModule } from './modules/groups.module';
+import { User } from 'src/submodules/backend-refresher-entities-1.0/src/entities/user.entity';
+import { Content } from 'src/submodules/backend-refresher-entities-1.0/src/entities/content-entity';
+import { Group } from 'src/submodules/backend-refresher-entities-1.0/src/entities/group.entity';
+import { ClientsModule, Transport } from '@nestjs/microservices';
+import { Reaction } from 'src/submodules/backend-refresher-entities-1.0/src/entities/reaction.entity';
+import { queues } from 'src/submodules/backend-refresher-1.0-rmq/src/constants/rmqQueues';
+import { Option } from 'src/submodules/backend-refresher-entities-1.0/src/entities/option.entity';
+
 
 @Module({
   imports: [
@@ -40,9 +40,8 @@ import { GroupsModule } from './modules/groups.module';
       },
     ]),
     TypeOrmModule.forFeature([User, Content, Group]),
-    GroupsModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [GroupsController],
+  providers: [GroupsService]
 })
-export class AppModule {}
+export class GroupsModule {}
